@@ -318,7 +318,7 @@ Use ASCII art or diagram-as-code tools:
 
 When deprecating features:
 1. Mark documentation as deprecated
-2. Explain why it's deprecated
+2. Explain why it is deprecated
 3. Provide migration path
 4. Set removal timeline
 5. Update related documentation

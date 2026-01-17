@@ -54,7 +54,7 @@ frontend/
 
 ### State Management
 
-- Keep state as close to where it's used as possible
+- Keep state as close to where it is used as possible
 - Lift state up when multiple components need access
 - Use appropriate state management patterns
 - Avoid unnecessary global state

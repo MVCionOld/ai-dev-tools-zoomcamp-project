@@ -100,7 +100,7 @@ This project uses GitHub Copilot as the primary development assistant. All contr
 ## Adding Dependencies
 
 Before adding any new dependency:
-1. Evaluate if it's truly necessary
+1. Evaluate if it is truly necessary
 2. Consider security implications
 3. Check for maintained and stable alternatives
 4. Document the reason for addition
