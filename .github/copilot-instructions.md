@@ -1,239 +1,168 @@
 # GitHub Copilot Instructions
 
-## Purpose
-
-These instructions constrain GitHub Copilot to work within the established architectural patterns and development practices of this repository.
+Constrain Copilot to work within established architectural patterns.
 
 ## Core Constraints
 
 ### 1. Respect the Architecture
 
 **ALWAYS:**
-- Review `ARCHITECTURE.md` before suggesting code changes
-- Maintain separation between frontend and backend components
-- Respect component boundaries and responsibilities
-- Follow established design patterns
-- Keep inter-component communication through defined interfaces
+- Review `ARCHITECTURE.md` before suggesting code
+- Maintain frontend/backend separation
+- Respect component boundaries
+- Follow established patterns
+- Use defined interfaces for communication
 
 **NEVER:**
-- Suggest code that violates architectural principles
+- Violate architectural principles
 - Bypass component boundaries
-- Mix concerns between layers
-- Propose tight coupling between components
-- Ignore the documented architecture
+- Mix layer concerns
+- Propose tight coupling
+- Ignore documented architecture
 
 ### 2. Ask Before Adding Tools
 
 **REQUIRED APPROVAL:**
-- New frameworks or libraries
-- Build tools or bundlers
+- Frameworks or libraries
+- Build/bundling tools
 - Testing frameworks
-- Linting or formatting tools
+- Linters/formatters
 - Database systems
-- External services or APIs
+- External services/APIs
 - Development dependencies
-
-**PROCESS:**
-1. Explain the need for the new tool
-2. Describe the problem it solves
-3. Consider existing alternatives
-4. Wait for explicit approval
-5. Document the addition in relevant files
 
 **NEVER:**
 - Add dependencies without approval
 - Install packages silently
-- Change build configurations without discussion
-- Introduce new tools for convenience alone
+- Change build configs without discussion
 
 ### 3. Avoid Silent Refactors
 
 **WHEN REFACTORING:**
-- Announce the intention to refactor
-- Explain the benefits and risks
-- Identify all affected components
-- Update relevant documentation
-- Get approval for large-scale changes
+- Announce intention
+- Explain benefits and risks
+- Identify affected components
+- Update documentation
+- Get approval for large changes
 
 **NEVER:**
-- Refactor code without notification
+- Refactor without notification
 - Change working code without justification
 - Modify multiple components silently
-- Rename files or directories without documentation
-- Restructure without updating architecture docs
+- Restructure without updating docs
 
 ### 4. Update Documentation on Structural Changes
 
-**DOCUMENTATION REQUIREMENTS:**
-- Update `ARCHITECTURE.md` for architectural changes
-- Update component READMEs for feature additions
-- Update `CONTRIBUTING.md` for process changes
-- Keep documentation synchronized with code
-- Document breaking changes clearly
+**UPDATE:**
+- `ARCHITECTURE.md` for architectural changes
+- Component READMEs for features
+- `CONTRIBUTING.md` for process changes
 
-**STRUCTURAL CHANGES INCLUDE:**
-- New directories or components
-- Modified component boundaries
-- Changed API interfaces
-- New architectural patterns
-- Updated data flows
+**STRUCTURAL CHANGES:**
+- New directories/components
+- Modified boundaries
+- API interface changes
+- New patterns
+- Data flow updates
 - Security model changes
 
-## Code Generation Guidelines
+## Code Generation
 
-### Code Quality
-- Generate readable, maintainable code
-- Follow language-specific conventions
-- Use descriptive variable and function names
-- Include necessary error handling
-- Add comments for complex logic only
-- Prefer clarity over cleverness
+### Quality
+- Readable, maintainable code
+- Follow language conventions
+- Descriptive names
+- Necessary error handling
+- Comments for complex logic only
 
 ### Consistency
-- Match existing code style in the file
-- Follow patterns used in the component
-- Respect `.editorconfig` settings
-- Use consistent naming across suggestions
-- Maintain alignment with project conventions
+- Match existing style
+- Follow component patterns
+- Respect `.editorconfig`
+- Consistent naming
 
 ### Security
-- Validate all user inputs
-- Avoid hardcoded credentials
-- Use secure communication methods
-- Implement proper authentication checks
-- Follow security best practices
-- Prevent common vulnerabilities (XSS, SQL injection, etc.)
+- Validate inputs
+- No hardcoded credentials
+- Secure communication
+- Proper authentication
+- Prevent XSS, SQL injection
 
-## Suggestion Behavior
+## Suggestions
 
-### When Suggesting Code
-1. Understand the context from surrounding code
-2. Verify alignment with architecture
-3. Check for existing patterns to follow
-4. Consider impact on other components
-5. Ensure documentation needs are met
+### Encouraged
+- Boilerplate following patterns
+- Error handling per conventions
+- Tests matching structure
+- Documentation updates
+- Code completion within bounds
 
-### Types of Suggestions
+### Discouraged
+- Violating constraints
+- Requiring new dependencies
+- Large refactors without approval
+- Config file changes
+- Interface modifications without review
 
-**ENCOURAGED:**
-- Boilerplate code following established patterns
-- Error handling based on project conventions
-- Unit tests matching existing test structure
-- Documentation updates for new features
-- Code completion within architectural bounds
+## Component Constraints
 
-**DISCOURAGED:**
-- Code that violates architectural constraints
-- Suggestions requiring new dependencies
-- Large-scale refactoring without approval
-- Changes to build or configuration files
-- Modifications to shared interfaces without review
+**Frontend:**
+- Separate UI/business logic
+- Established state management
+- Validate before API calls
+- Handle API errors
 
-## Component-Specific Constraints
+**Backend:**
+- Input validation
+- RESTful/GraphQL conventions
+- Business logic in service layer
+- Repository pattern for data
+- Appropriate HTTP status codes
 
-### Frontend
-- Keep UI logic separate from business logic
-- Use established state management patterns
-- Follow component structure conventions
-- Validate user input before API calls
-- Handle API errors gracefully
+**Documentation:**
+- Clear, concise language
+- Markdown best practices
+- Consistent formatting
 
-### Backend
-- Implement proper input validation
-- Follow RESTful or GraphQL conventions
-- Keep business logic in service layer
-- Use repository pattern for data access
-- Return appropriate HTTP status codes
+## Testing
 
-### Documentation
-- Use clear, concise language
-- Follow markdown best practices
-- Include code examples when helpful
-- Keep formatting consistent
-- Update related documents together
-
-## Testing Guidance
-
-### Test Generation
-- Match existing test structure and style
-- Cover happy paths and edge cases
-- Use established testing patterns
-- Mock external dependencies appropriately
-- Keep tests focused and isolated
-
-### Test Constraints
-- Do not add new testing frameworks without approval
-- Follow existing test organization
-- Maintain test independence
-- Use descriptive test names
-- Keep tests maintainable
+- Match existing structure
+- Cover edge cases
+- Mock dependencies
+- No new frameworks without approval
+- Descriptive test names
 
 ## API Development
 
-### API Constraints
-- Define clear contracts before implementation
-- Document all endpoints
-- Version APIs appropriately
-- Validate all inputs
-- Return consistent response formats
-- Handle errors with meaningful messages
+- Define contracts first
+- Document endpoints
+- Version appropriately
+- Validate inputs
+- Consistent responses
+- Meaningful errors
+- Never break contracts without discussion
+- Document breaking changes
 
-### API Changes
-- Never break existing API contracts without discussion
-- Document breaking changes clearly
-- Provide migration guides when needed
-- Update API documentation with code
-- Consider backward compatibility
+## Review Checklist
 
-## Performance Considerations
-
-- Suggest efficient algorithms and data structures
-- Avoid premature optimization
-- Consider scalability in suggestions
-- Flag potential performance issues
-- Recommend caching where appropriate
-
-## Error Handling
-
-- Always include appropriate error handling
-- Use consistent error handling patterns
-- Provide meaningful error messages
-- Log errors appropriately
-- Handle edge cases gracefully
-
-## Review Checklist for Copilot Suggestions
-
-Before accepting any Copilot suggestion, verify:
-- [ ] Aligns with architecture documented in ARCHITECTURE.md
-- [ ] Does not introduce new dependencies without approval
-- [ ] Follows established coding conventions
-- [ ] Includes necessary error handling
-- [ ] Does not require documentation updates OR documentation is updated
-- [ ] Respects component boundaries
-- [ ] Matches existing code style
-- [ ] Does not introduce security vulnerabilities
-- [ ] Is necessary and not premature optimization
-- [ ] Does not silently refactor existing working code
+Before accepting suggestions:
+- [ ] Aligns with ARCHITECTURE.md
+- [ ] No new dependencies without approval
+- [ ] Follows conventions
+- [ ] Includes error handling
+- [ ] Documentation updated if needed
+- [ ] Respects boundaries
+- [ ] Matches code style
+- [ ] No security vulnerabilities
+- [ ] Not premature optimization
+- [ ] No silent refactoring
 
 ## Escalation
 
-When Copilot suggests something that:
-- Violates these constraints
+**STOP and ask for review when:**
+- Violates constraints
 - Requires architectural discussion
-- Needs approval for new tools
+- Needs tool approval
 - Involves major refactoring
-- Changes component interfaces
+- Changes interfaces
 - Has security implications
-
-**STOP and ask for human review before proceeding.**
-
-## Summary
-
-GitHub Copilot is a powerful assistant, but must work within the established guidelines of this repository. These constraints ensure:
-- Architectural integrity is maintained
-- Code quality remains high
-- Documentation stays synchronized
-- Changes are intentional and reviewed
-- The codebase remains maintainable
-
-Use Copilot to accelerate development, not to bypass best practices.

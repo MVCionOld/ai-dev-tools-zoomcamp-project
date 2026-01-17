@@ -1,390 +1,190 @@
 # Documentation
 
-## Overview
+Comprehensive project documentation. Keep clear, accurate, synchronized with code.
 
-This directory contains comprehensive documentation for the project. All documentation should be clear, accurate, and kept in sync with the codebase.
-
-## Documentation Structure
+## Structure
 
 ```
 docs/
 ├── README.md           # This file - documentation guidelines
-├── architecture/       # Detailed architecture documentation
-├── api/               # API specifications and references
-├── guides/            # How-to guides and tutorials
-└── decisions/         # Architecture decision records (ADRs)
+├── architecture/       # Architecture details
+├── api/               # API specs
+├── guides/            # How-to guides
+└── decisions/         # Architecture Decision Records (ADRs)
 ```
 
-## Documentation Standards
+## Standards
 
-### Writing Guidelines
-
-**Clarity:**
-- Use clear, concise language
-- Avoid jargon unless necessary
-- Define technical terms on first use
-- Write for your audience
-- Use active voice
+**Writing:**
+- Clear, concise language
+- Avoid unnecessary jargon
+- Define technical terms
+- Active voice
+- Write for audience
 
 **Structure:**
-- Use descriptive headings
-- Organize content logically
-- Include table of contents for long documents
-- Break up long sections
-- Use lists and bullet points effectively
+- Descriptive headings
+- Logical organization
+- Table of contents for long docs
+- Lists and bullets
+- Consistent styling
 
-**Formatting:**
-- Follow markdown best practices
-- Use consistent heading hierarchy
-- Format code blocks with proper syntax highlighting
-- Include diagrams where helpful
-- Maintain consistent styling
-
-### Content Types
-
-**Architecture Documentation:**
-- System overview and design principles
-- Component relationships
-- Data flow diagrams
-- Design decisions and rationale
-- Technology stack descriptions
-
-**API Documentation:**
-- Endpoint descriptions
-- Request/response schemas
-- Authentication requirements
-- Error responses
-- Code examples
-
-**Guides and Tutorials:**
-- Step-by-step instructions
-- Prerequisites and setup
-- Code examples
-- Expected outcomes
-- Troubleshooting tips
-
-**Reference Documentation:**
-- Complete feature lists
-- Configuration options
-- Command references
-- Glossary of terms
+**Content Types:**
+- Architecture: System design, patterns, decisions
+- API: Endpoints, schemas, auth, errors
+- Guides: Step-by-step instructions
+- Reference: Features, config, commands, glossary
 
 ## Markdown Best Practices
 
-### Headings
-
-```markdown
-# H1 - Document Title
+**Headings:**
+```
+# H1 - Document Title (one per doc)
 ## H2 - Major Sections
 ### H3 - Subsections
-#### H4 - Detail Sections
 ```
 
-Use only one H1 per document.
+**Code Blocks:**
+Specify language for syntax highlighting. Example:
+- Start with triple backticks and language name
+- Add code content
+- End with triple backticks
 
-### Code Blocks
-
-Always specify language for syntax highlighting:
-
+**Links:**
 ```markdown
-```python
-def example():
-    return "Hello, World!"
-```
+[Descriptive text](path/to/file.md)
 ```
 
-### Links
-
-Use descriptive link text:
+**Lists:**
 ```markdown
-See [Architecture Overview](ARCHITECTURE.md) for details.
-```
-
-### Lists
-
-**Unordered:**
-```markdown
-- First item
-- Second item
+- Unordered item
   - Nested item
-  - Another nested item
+
+1. Ordered item
+2. Second item
 ```
 
-**Ordered:**
+**Emphasis:**
 ```markdown
-1. First step
-2. Second step
-3. Third step
-```
-
-### Tables
-
-```markdown
-| Column 1 | Column 2 | Column 3 |
-|----------|----------|----------|
-| Data 1   | Data 2   | Data 3   |
-```
-
-### Emphasis
-
-```markdown
-*italic* or _italic_
-**bold** or __bold__
+*italic*
+**bold**
 `inline code`
 ```
 
 ## Document Types
 
-### README Files
-
-Every directory should have a README.md that includes:
-- Purpose of the directory
+**README:**
+Every directory needs README.md with:
+- Purpose
 - Overview of contents
-- How to use the resources
-- Links to related documentation
+- Usage instructions
+- Related docs links
 
-### Architecture Decision Records (ADRs)
-
-When making significant architectural decisions:
-
-**Template:**
+**ADRs:**
 ```markdown
 # ADR [Number]: [Title]
-
-## Status
-[Proposed | Accepted | Deprecated | Superseded]
-
-## Context
-What is the issue we're addressing?
-
-## Decision
-What decision are we making?
-
-## Consequences
-What are the results of this decision?
+## Status: [Proposed/Accepted/Deprecated]
+## Context: Issue being addressed
+## Decision: What we're doing
+## Consequences: Results
 ```
 
-### API Documentation
-
-**Endpoint Template:**
+**API Docs:**
 ```markdown
 ### [METHOD] /api/v1/resource
-
-**Description:** What this endpoint does
-
-**Authentication:** Required/Not Required
-
-**Request:**
-- Headers: [list]
-- Body: [schema]
-
-**Response:**
-- Success: [status code and schema]
-- Error: [status codes and schemas]
-
-**Example:**
-[Request and response examples]
+Description, Auth, Request, Response, Example
 ```
-
-### How-To Guides
-
-**Structure:**
-1. **Goal**: What will be accomplished
-2. **Prerequisites**: What's needed before starting
-3. **Steps**: Numbered, clear instructions
-4. **Verification**: How to confirm success
-5. **Troubleshooting**: Common issues and solutions
-
-## Documentation Workflow
-
-### Creating New Documentation
-
-1. Determine the appropriate document type
-2. Choose the right location
-3. Follow the relevant template
-4. Write clear, concise content
-5. Review for accuracy and clarity
-6. Link from related documents
-
-### Updating Documentation
-
-When code changes:
-1. Identify affected documentation
-2. Update all relevant documents
-3. Verify accuracy
-4. Update modification date
-5. Review for consistency
-
-### Reviewing Documentation
-
-**Review Checklist:**
-- [ ] Accurate and up to date
-- [ ] Clear and concise
-- [ ] Properly formatted
-- [ ] Links working
-- [ ] Code examples tested
-- [ ] Spelling and grammar checked
-- [ ] Consistent with other documentation
 
 ## Code Examples
 
-### Best Practices for Code Examples
-
-**Completeness:**
-- Include all necessary imports
-- Show complete, runnable examples
-- Indicate where to place the code
-
-**Clarity:**
-- Use descriptive variable names
+**Best Practices:**
+- Include necessary imports
+- Complete, runnable examples
+- Descriptive variable names
 - Add comments for complex parts
-- Keep examples focused
-
-**Accuracy:**
-- Test all code examples
-- Keep examples up to date with codebase
-- Update when APIs change
+- Keep focused
+- Test all examples
+- Update with API changes
 
 ### Example Template
 
-```markdown
-**Example: [What this demonstrates]**
-
-```[language]
-// Brief description
-[Complete, tested code]
-```
-
-**Expected Output:**
-```
-[What the code produces]
-```
-```
+Structure examples with:
+- Title describing what is demonstrated
+- Code block with language specified
+- Expected output section
 
 ## Diagrams and Visual Aids
 
-### When to Use Diagrams
-
-- Explaining architecture
-- Showing data flow
-- Illustrating relationships
-- Describing processes
-- Clarifying complex concepts
-
-### Diagram Types
-
-**Architecture Diagrams:**
-- System components
-- Component interactions
-- Deployment architecture
-
-**Flow Diagrams:**
+**When to Use:**
+- Architecture explanations
 - Data flow
-- Process flow
-- User journeys
+- Relationships
+- Processes
+- Complex concepts
 
-**Sequence Diagrams:**
-- API interactions
-- Component communication
-- Event sequences
+**Types:**
+- Architecture diagrams
+- Flow diagrams
+- Sequence diagrams
 
-### Diagram Tools
-
-Use ASCII art or diagram-as-code tools:
+**ASCII Example:**
 ```
 ┌─────────────┐
 │  Component  │
-│             │
 └──────┬──────┘
        │
        ▼
 ┌─────────────┐
 │   Another   │
-│  Component  │
 └─────────────┘
 ```
 
 ## Maintenance
 
-### Regular Reviews
-
-- Review documentation quarterly
-- Update for code changes immediately
+**Regular Reviews:**
+- Quarterly documentation review
+- Update immediately for code changes
 - Check links periodically
-- Verify examples still work
-- Remove outdated information
+- Verify examples work
+- Remove outdated info
 
-### Deprecation
-
-When deprecating features:
-1. Mark documentation as deprecated
+**Deprecation:**
+1. Mark as deprecated
 2. Explain why it is deprecated
 3. Provide migration path
 4. Set removal timeline
-5. Update related documentation
+5. Update related docs
 
-### Versioning
-
-- Version documentation with major releases
-- Maintain docs for supported versions
+**Versioning:**
+- Version with major releases
+- Maintain for supported versions
 - Archive old versions
-- Clearly mark version in documentation
+- Mark version clearly
 
-## Organization Guidelines
+## Organization
 
-### File Naming
+**File Naming:**
+- Lowercase with hyphens: `api-reference.md`
+- Descriptive names
+- Consistent conventions
 
-- Use lowercase with hyphens: `api-reference.md`
-- Be descriptive: `authentication-guide.md`
-- Use consistent conventions
-- Avoid special characters
-
-### Directory Structure
-
-- Group related documents
-- Keep structure shallow
-- Use clear directory names
-- Include README in each directory
-
-## Documentation Types by Audience
-
-### For Developers
-
-- API documentation
-- Code examples
-- Architecture guides
-- Contributing guidelines
-- Development setup
-
-### For Users
-
-- User guides
-- Tutorials
-- Feature documentation
-- FAQ
-- Troubleshooting
-
-### For Operators
-
-- Deployment guides
-- Configuration reference
-- Monitoring setup
-- Maintenance procedures
-- Disaster recovery
+**Directory:**
+- Group related docs
+- Shallow structure
+- Clear names
+- README in each directory
 
 ## Quality Standards
 
-### Content Quality
+**Content:**
+- Accurate
+- Complete
+- Clear
+- Concise
+- Current
 
-- **Accurate**: All information must be correct
-- **Complete**: Cover all necessary aspects
-- **Clear**: Easy to understand
-- **Concise**: No unnecessary information
-- **Current**: Up to date with codebase
-
-### Technical Quality
-
-- All code examples tested
+**Technical:**
+- Code examples tested
 - Links verified
 - Proper markdown formatting
 - Consistent styling
@@ -392,118 +192,64 @@ When deprecating features:
 
 ## Templates
 
-### New Feature Documentation
-
+**Feature Documentation:**
 ```markdown
 # Feature Name
-
 ## Overview
-Brief description of the feature.
-
 ## Use Cases
-When and why to use this feature.
-
 ## How It Works
-Technical explanation.
-
 ## Usage
-Code examples and instructions.
-
 ## Configuration
-Available options and settings.
-
 ## Best Practices
-Recommended usage patterns.
-
 ## Troubleshooting
-Common issues and solutions.
 ```
 
-### API Documentation Template
-
-See API Documentation section above.
-
-### Tutorial Template
-
+**Tutorial:**
 ```markdown
 # Tutorial: [Title]
-
 ## What You'll Build
-Description of the end result.
-
 ## Prerequisites
-- Required knowledge
-- Required tools
-- Required setup
-
-## Step 1: [Action]
-Instructions and code.
-
-## Step 2: [Action]
-Instructions and code.
-
-[Continue for all steps]
-
+## Steps
 ## Next Steps
-What to learn next.
-
 ## Further Reading
-Related documentation.
 ```
 
 ## Integration with Development
 
-### Documentation as Code
+**Documentation as Code:**
+- Store with code in version control
+- Review in PRs
+- Use CI validation
+- Keep in sync
+- Version together
 
-- Store docs with code in version control
-- Review documentation changes in PRs
-- Use CI to validate documentation
-- Keep docs and code in sync
-- Version together with releases
-
-### Documentation in Pull Requests
-
-When submitting PRs:
-- Include documentation updates
+**In Pull Requests:**
+- Include doc updates
 - Update API docs for API changes
-- Add guides for new features
-- Update architecture docs for structural changes
-- Include ADRs for significant decisions
+- Add guides for features
+- Update architecture for structural changes
+- Include ADRs for decisions
 
 ## Resources
 
-- Review `ARCHITECTURE.md` for architecture documentation
-- Check `CONTRIBUTING.md` for contribution process
-- Refer to `.editorconfig` for formatting standards
-- Follow `.github/copilot-instructions.md` for Copilot usage
-- Consult component READMEs for specific topics
+- `ARCHITECTURE.md` - Architecture documentation
+- `CONTRIBUTING.md` - Contribution process
+- `.editorconfig` - Formatting standards
+- `.github/copilot-instructions.md` - Copilot usage
+- Component READMEs - Specific topics
 
 ## Continuous Improvement
 
-### Feedback
-
+**Feedback:**
 - Welcome documentation feedback
-- Track documentation issues
-- Conduct documentation surveys
-- Monitor documentation usage
-- Iterate based on user needs
+- Track issues
+- Conduct surveys
+- Monitor usage
+- Iterate
 
-### Metrics
-
-Track:
+**Metrics:**
 - Documentation coverage
 - Outdated documents
 - Broken links
 - User feedback
 - Common questions
-
-## Summary
-
-Good documentation is:
-- **Accurate**: Reflects current state
-- **Accessible**: Easy to find and read
-- **Complete**: Covers all necessary information
-- **Clear**: Easy to understand
-- **Current**: Kept up to date
-
-Maintain documentation with the same rigor as code to ensure it remains a valuable resource for all stakeholders.

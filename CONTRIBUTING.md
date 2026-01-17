@@ -1,165 +1,150 @@
 # Contributing Guidelines
 
-## Overview
-
-This project uses GitHub Copilot as the primary development assistant. All contributions must follow the established architectural patterns and guidelines.
+GitHub Copilot is the primary development assistant. Follow established patterns and guidelines.
 
 ## Development Workflow
 
 ### 1. Understand the Architecture
-- Read `ARCHITECTURE.md` thoroughly before making changes
-- Understand component boundaries and responsibilities
-- Review existing patterns and conventions
-- Consult `.github/copilot-instructions.md` for Copilot constraints
+- Read `ARCHITECTURE.md`
+- Understand component boundaries
+- Review patterns and conventions
+- Check `.github/copilot-instructions.md`
 
-### 2. Plan Your Changes
-- Identify which component(s) your changes affect
-- Document the purpose and scope of your changes
-- Consider impact on other components
-- Ensure changes align with architectural principles
+### 2. Plan Changes
+- Identify affected components
+- Document purpose and scope
+- Consider impact
+- Align with architectural principles
 
-### 3. Implementation Guidelines
-- Follow established coding standards (see `.editorconfig`)
-- Use GitHub Copilot to assist with implementation
+### 3. Implementation
+- Follow `.editorconfig` standards
+- Use Copilot for assistance
 - Respect architectural boundaries
-- Write self-documenting code with clear naming
-- Add comments for complex logic
+- Write self-documenting code
+- Comment complex logic only
 
-### 4. Documentation Requirements
-- Update component READMEs if adding new features
-- Document API changes in relevant files
+### 4. Documentation
+- Update component READMEs for features
+- Document API changes
 - Update ARCHITECTURE.md for structural changes
-- Keep documentation synchronized with code
+- Keep docs synchronized
 
 ### 5. Code Review
-- Self-review changes before submitting
-- Ensure no violations of architectural constraints
-- Verify documentation is updated
-- Test changes in isolation when possible
+- Self-review before submitting
+- Ensure no constraint violations
+- Verify documentation updates
+- Test in isolation when possible
 
-## Working with GitHub Copilot
+## Copilot Usage
 
-### Best Practices
-- Provide clear context in comments before requesting code
-- Review and understand all Copilot suggestions
-- Verify suggestions align with project architecture
-- Modify suggestions to match project conventions
-- Use Copilot for repetitive tasks and boilerplate
+**Best Practices:**
+- Provide clear context
+- Review all suggestions
+- Verify alignment with architecture
+- Match project conventions
+- Use for repetitive tasks
 
-### Constraints
-- Always ask before adding new tools or dependencies
-- Respect the established architecture
-- Avoid silent refactoring without documentation
-- Update documentation when making structural changes
-- Do not bypass architectural patterns with Copilot suggestions
+**Constraints:**
+- Ask before adding tools/dependencies
+- Respect architecture
+- No silent refactoring
+- Update docs on structural changes
+- Don't bypass patterns
 
 ## Code Standards
 
-### General Principles
-- Write clear, readable code
-- Prefer explicitness over cleverness
-- Keep functions small and focused
-- Follow single responsibility principle
-- Maintain consistent naming conventions
+**General:**
+- Clear, readable code
+- Explicitness over cleverness
+- Small, focused functions
+- Single responsibility
+- Consistent naming
 
-### File Organization
-- Group related functionality together
-- Use clear directory structures
-- Keep component boundaries clean
-- Separate concerns appropriately
+**Organization:**
+- Group related functionality
+- Clear directory structures
+- Clean component boundaries
+- Appropriate separation
 
-### Naming Conventions
-- Use descriptive names for variables and functions
-- Follow language-specific conventions
-- Be consistent across the codebase
-- Avoid abbreviations unless widely understood
+## Component Guidelines
 
-## Component-Specific Guidelines
+**Frontend:**
+- Component-based architecture
+- Separate presentational/container components
+- Appropriate state management
+- Performance optimization
+- See `frontend/README.md`
 
-### Frontend Development
-- Follow component-based architecture
-- Separate presentational and container components
-- Manage state appropriately
-- Optimize for performance and user experience
-- Refer to `frontend/README.md` for details
+**Backend:**
+- Clean API interfaces
+- Input validation
+- Graceful error handling
+- RESTful/GraphQL conventions
+- See `backend/README.md`
 
-### Backend Development
-- Implement clean API interfaces
-- Validate all inputs
-- Handle errors gracefully
-- Follow RESTful or GraphQL conventions
-- Refer to `backend/README.md` for details
-
-### Documentation
-- Write clear, concise documentation
-- Use proper markdown formatting
-- Include code examples where appropriate
-- Keep documentation up to date
-- Refer to `docs/README.md` for details
+**Documentation:**
+- Clear, concise
+- Proper markdown
+- Include examples
+- Keep updated
+- See `docs/README.md`
 
 ## Adding Dependencies
 
-Before adding any new dependency:
-1. Evaluate if it is truly necessary
-2. Consider security implications
-3. Check for maintained and stable alternatives
-4. Document the reason for addition
-5. Get approval from the team
-6. Update relevant documentation
+Before adding:
+1. Evaluate necessity
+2. Consider security
+3. Check alternatives
+4. Document reason
+5. Get approval
+6. Update docs
 
 ## Structural Changes
 
-Structural changes require:
+Require:
 1. Proposal and discussion
-2. Update to ARCHITECTURE.md
+2. ARCHITECTURE.md update
 3. Migration plan if needed
-4. Documentation updates across all affected components
-5. Team review and approval
+4. Documentation updates
+5. Team review
 
 ## Quality Standards
 
-### Code Quality
-- Code must be readable and maintainable
-- Follow DRY (Don't Repeat Yourself) principle
-- Write modular, reusable components
-- Handle edge cases appropriately
-- Include error handling
+**Code:**
+- Readable and maintainable
+- DRY principle
+- Modular, reusable
+- Handle edge cases
+- Error handling
 
-### Documentation Quality
-- Documentation must be clear and accurate
-- Use proper grammar and formatting
-- Include examples where helpful
-- Keep documentation concise but complete
-- Update documentation with code changes
+**Documentation:**
+- Clear and accurate
+- Proper formatting
+- Include examples
+- Concise but complete
+- Update with code
 
 ## Git Workflow
 
-### Commits
-- Write clear, descriptive commit messages
-- Make atomic commits (one logical change per commit)
-- Reference issues when applicable
-- Keep commits focused and small
+**Commits:**
+- Clear messages
+- Atomic commits
+- Reference issues
+- Focused and small
 
-### Branches
-- Use descriptive branch names
-- Keep branches focused on single features or fixes
-- Regularly sync with main branch
-- Delete branches after merging
+**Branches:**
+- Descriptive names
+- Single feature/fix focus
+- Sync with main regularly
+- Delete after merge
 
-## Questions and Support
+## Anti-Patterns
 
-- Review existing documentation first
-- Check ARCHITECTURE.md for design guidance
-- Consult component READMEs for specific questions
-- Review .github/copilot-instructions.md for Copilot usage
-- Ask the team when uncertain
-
-## Anti-Patterns to Avoid
-
-- Making changes without understanding architecture
-- Adding dependencies without approval
-- Silent refactoring across multiple components
-- Ignoring established conventions
-- Bypassing architectural constraints
-- Updating code without updating documentation
-- Using Copilot suggestions blindly without review
+Avoid:
+- Changes without understanding architecture
+- Dependencies without approval
+- Silent cross-component refactoring
+- Ignoring conventions
+- Bypassing constraints
+- Updating code without docs
+- Blind Copilot acceptance

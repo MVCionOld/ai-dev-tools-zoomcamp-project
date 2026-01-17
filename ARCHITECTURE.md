@@ -1,97 +1,89 @@
 # Architecture
 
-## Overview
-
-This repository follows a layered full-stack architecture with clear separation of concerns between frontend, backend, and documentation components.
+Layered full-stack architecture with clear separation between frontend, backend, and documentation.
 
 ## System Design
-
-### Component Architecture
 
 ```
 ┌─────────────────────────────────────────┐
 │            Frontend Layer               │
 │  (User Interface & Client Logic)        │
 └─────────────────┬───────────────────────┘
-                  │
                   │ API Communication
-                  │
 ┌─────────────────▼───────────────────────┐
 │            Backend Layer                │
 │  (Business Logic & Data Processing)     │
 └─────────────────────────────────────────┘
 ```
 
-### Architectural Principles
+## Principles
 
-1. **Separation of Concerns**: Frontend and backend are independent components with well-defined interfaces
-2. **Modularity**: Each component is self-contained and can be developed independently
-3. **Documentation First**: All architectural decisions and component designs must be documented
-4. **API-Driven**: Communication between frontend and backend occurs through defined APIs
-5. **Scalability**: Architecture supports horizontal scaling of individual components
+1. **Separation of Concerns**: Independent components with defined interfaces
+2. **Modularity**: Self-contained, independently developable components
+3. **Documentation First**: Document all decisions and designs
+4. **API-Driven**: Communication through defined APIs
+5. **Scalability**: Support horizontal scaling
 
 ## Component Responsibilities
 
-### Frontend
-- User interface rendering
-- Client-side state management
-- User input validation
+**Frontend:**
+- UI rendering
+- Client-side state
+- Input validation
 - API consumption
-- User experience optimization
 
-### Backend
-- Business logic implementation
-- Data validation and processing
-- API endpoint implementation
-- Authentication and authorization
-- Integration with external services
+**Backend:**
+- Business logic
+- Data validation/processing
+- API endpoints
+- Authentication/authorization
+- External integrations
 
-### Documentation
-- Architecture documentation
-- API specifications
+**Documentation:**
+- Architecture docs
+- API specs
 - Development guidelines
 - Deployment procedures
-- Component-specific documentation
 
 ## Technology Constraints
 
-### Framework Selection
-- Framework choices must be explicitly approved and documented
-- Each technology addition requires architectural review
-- Technology stack must align with project goals
-- Performance and maintainability are key selection criteria
+**Framework Selection:**
+- Explicit approval required
+- Architectural review needed
+- Must align with project goals
+- Prioritize performance and maintainability
 
-### Integration Points
-- All inter-component communication must go through defined interfaces
+**Integration Points:**
+- Communication through defined interfaces
 - No direct database access from frontend
-- Backend exposes RESTful or GraphQL APIs
-- Clear contract definitions between layers
+- RESTful or GraphQL APIs
+- Clear contract definitions
 
 ## Design Patterns
 
-### Recommended Patterns
-- Repository pattern for data access
-- Service layer for business logic
-- Controller pattern for API endpoints
-- Component-based UI architecture
-- Dependency injection for loose coupling
+**Recommended:**
+- Repository pattern (data access)
+- Service layer (business logic)
+- Controller pattern (API endpoints)
+- Component-based UI
+- Dependency injection
 
-### Anti-Patterns to Avoid
-- Tight coupling between frontend and backend
-- Direct database access from presentation layer
-- Business logic in UI components
-- Undocumented architectural changes
-- Silent refactoring without review
+**Avoid:**
+- Tight coupling
+- Direct database access from presentation
+- Business logic in UI
+- Undocumented changes
+- Silent refactoring
 
 ## Data Flow
 
-1. User interaction in frontend
+1. User interaction → Frontend
 2. Frontend validates input
-3. Frontend sends API request to backend
+3. API request → Backend
 4. Backend validates request
-5. Backend processes business logic
-6. Backend returns response
-7. Frontend updates UI based on response
+5. Business logic processing
+6. Response → Frontend
+7. UI update
 
 ## Security Considerations
 
@@ -100,14 +92,6 @@ This repository follows a layered full-stack architecture with clear separation 
 - Secure communication between components
 - Data encryption for sensitive information
 - Regular security audits and updates
-
-## Scalability Strategy
-
-- Horizontal scaling of backend services
-- Frontend served through CDN
-- Database connection pooling
-- Caching at appropriate layers
-- Asynchronous processing for long-running tasks
 
 ## Change Management
 
