@@ -1,39 +1,34 @@
-# AI Dev Tools Zoomcamp Project
+# AI-Powered Driving License Exam Prep Platform
 
-Copilot-first full-stack repository bootstrap for AI-assisted development.
+See [PROJECT.md](./PROJECT.md) for problem statement and features.
+
+## Quick Links
+
+| Document | Purpose |
+|----------|---------|
+| [SETUP.md](./SETUP.md) | **Start here** — Prerequisites, install, run |
+| [docs/MVP.md](./docs/MVP.md) | Sprint 1-2 scope, Definition of Done |
+| [docs/api-contract.md](./docs/api-contract.md) | Full API request/response schemas |
+| [ARCHITECTURE.md](./ARCHITECTURE.md) | System design, tech stack, layers |
+| [CONTRIBUTING.md](./CONTRIBUTING.md) | Git workflow, PR process |
 
 ## Repository Structure
 
 ```
-.
-├── backend/          # Backend service components
-├── frontend/         # Frontend application components
-├── docs/             # Project documentation
-├── .github/          # GitHub configuration and Copilot instructions
-├── README.md         # This file
-├── ARCHITECTURE.md   # System architecture
-└── CONTRIBUTING.md   # Contribution guidelines
+├── backend/           # Django + DRF API
+├── frontend/          # React + TypeScript SPA
+├── docs/              # API contract, MVP scope, UX scenarios
+└── .github/           # Copilot instructions
 ```
 
-## Purpose
+## Development
 
-Bootstrap template for full-stack applications with GitHub Copilot:
-- Clear architectural boundaries (frontend/backend)
-- Documentation standards
-- AI-assisted development guidelines
-- Coding standards and conventions
+```bash
+# Backend
+cd backend && uv sync && uv run python manage.py runserver
 
-## Getting Started
+# Frontend  
+cd frontend && npm install && npm run dev
+```
 
-1. Review `ARCHITECTURE.md` for system design
-2. Read `CONTRIBUTING.md` for development guidelines
-3. Check `.github/copilot-instructions.md` for Copilot constraints
-4. Explore component READMEs: `frontend/`, `backend/`, `docs/`
-
-## Documentation
-
-- **ARCHITECTURE.md**: System architecture and design principles
-- **CONTRIBUTING.md**: Contribution process
-- **frontend/README.md**: Frontend guidelines
-- **backend/README.md**: Backend guidelines
-- **docs/README.md**: Documentation standards
+See [SETUP.md](./SETUP.md) for complete instructions.

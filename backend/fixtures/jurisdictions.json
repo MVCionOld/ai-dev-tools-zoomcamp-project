@@ -1,0 +1,35 @@
+[
+  {
+    "model": "jurisdictions.jurisdiction",
+    "pk": 1,
+    "fields": {
+      "code": "DE",
+      "name": "Germany",
+      "languages": ["de", "en", "tr", "pt"],
+      "default_language": "de",
+      "is_active": true
+    }
+  },
+  {
+    "model": "jurisdictions.jurisdiction",
+    "pk": 2,
+    "fields": {
+      "code": "ES",
+      "name": "Spain",
+      "languages": ["es", "en", "ca"],
+      "default_language": "es",
+      "is_active": true
+    }
+  },
+  {
+    "model": "jurisdictions.jurisdiction",
+    "pk": 3,
+    "fields": {
+      "code": "PT",
+      "name": "Portugal",
+      "languages": ["pt", "en"],
+      "default_language": "pt",
+      "is_active": true
+    }
+  }
+]

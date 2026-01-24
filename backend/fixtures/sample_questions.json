@@ -1,0 +1,220 @@
+[
+  {
+    "model": "questions.question",
+    "pk": 1,
+    "fields": {
+      "jurisdiction": 1,
+      "type": "multiple_choice",
+      "difficulty": "beginner",
+      "topic": "road_signs",
+      "text": "What does a red octagonal sign with 'STOP' mean?",
+      "image_url": null,
+      "options": [
+        {"key": "A", "text": "Stop completely and give way to all traffic"},
+        {"key": "B", "text": "Slow down and proceed if clear"},
+        {"key": "C", "text": "Stop only if you see other vehicles"},
+        {"key": "D", "text": "Honk and continue"}
+      ],
+      "correct_answer": "A",
+      "source": "seed",
+      "is_validated": true,
+      "explanation_cache": null
+    }
+  },
+  {
+    "model": "questions.question",
+    "pk": 2,
+    "fields": {
+      "jurisdiction": 1,
+      "type": "multiple_choice",
+      "difficulty": "beginner",
+      "topic": "road_signs",
+      "text": "What does a triangular sign with a red border indicate?",
+      "image_url": null,
+      "options": [
+        {"key": "A", "text": "Mandatory instruction"},
+        {"key": "B", "text": "Warning of hazard ahead"},
+        {"key": "C", "text": "Prohibition"},
+        {"key": "D", "text": "Information"}
+      ],
+      "correct_answer": "B",
+      "source": "seed",
+      "is_validated": true,
+      "explanation_cache": null
+    }
+  },
+  {
+    "model": "questions.question",
+    "pk": 3,
+    "fields": {
+      "jurisdiction": 1,
+      "type": "multiple_choice",
+      "difficulty": "beginner",
+      "topic": "right_of_way",
+      "text": "At an unmarked intersection of equal roads, who has priority?",
+      "image_url": null,
+      "options": [
+        {"key": "A", "text": "The vehicle coming from the left"},
+        {"key": "B", "text": "The vehicle coming from the right"},
+        {"key": "C", "text": "The larger vehicle"},
+        {"key": "D", "text": "The vehicle that arrived first"}
+      ],
+      "correct_answer": "B",
+      "source": "seed",
+      "is_validated": true,
+      "explanation_cache": null
+    }
+  },
+  {
+    "model": "questions.question",
+    "pk": 4,
+    "fields": {
+      "jurisdiction": 1,
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "topic": "speed_limits",
+      "text": "What is the default speed limit on German Autobahn unless otherwise posted?",
+      "image_url": null,
+      "options": [
+        {"key": "A", "text": "100 km/h"},
+        {"key": "B", "text": "120 km/h"},
+        {"key": "C", "text": "130 km/h recommended, no strict limit"},
+        {"key": "D", "text": "No speed limit at all"}
+      ],
+      "correct_answer": "C",
+      "source": "seed",
+      "is_validated": true,
+      "explanation_cache": null
+    }
+  },
+  {
+    "model": "questions.question",
+    "pk": 5,
+    "fields": {
+      "jurisdiction": 1,
+      "type": "multiple_choice",
+      "difficulty": "beginner",
+      "topic": "speed_limits",
+      "text": "What is the speed limit in urban areas in Germany unless otherwise posted?",
+      "image_url": null,
+      "options": [
+        {"key": "A", "text": "30 km/h"},
+        {"key": "B", "text": "50 km/h"},
+        {"key": "C", "text": "60 km/h"},
+        {"key": "D", "text": "70 km/h"}
+      ],
+      "correct_answer": "B",
+      "source": "seed",
+      "is_validated": true,
+      "explanation_cache": null
+    }
+  },
+  {
+    "model": "questions.question",
+    "pk": 6,
+    "fields": {
+      "jurisdiction": 1,
+      "type": "multiple_choice",
+      "difficulty": "beginner",
+      "topic": "parking",
+      "text": "How far must you park from a pedestrian crossing?",
+      "image_url": null,
+      "options": [
+        {"key": "A", "text": "3 meters"},
+        {"key": "B", "text": "5 meters"},
+        {"key": "C", "text": "10 meters"},
+        {"key": "D", "text": "15 meters"}
+      ],
+      "correct_answer": "B",
+      "source": "seed",
+      "is_validated": true,
+      "explanation_cache": null
+    }
+  },
+  {
+    "model": "questions.question",
+    "pk": 7,
+    "fields": {
+      "jurisdiction": 1,
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "topic": "emergency",
+      "text": "What should you do when you hear an emergency vehicle siren?",
+      "image_url": null,
+      "options": [
+        {"key": "A", "text": "Stop immediately where you are"},
+        {"key": "B", "text": "Speed up to get out of the way"},
+        {"key": "C", "text": "Move to the right and slow down or stop"},
+        {"key": "D", "text": "Continue at normal speed"}
+      ],
+      "correct_answer": "C",
+      "source": "seed",
+      "is_validated": true,
+      "explanation_cache": null
+    }
+  },
+  {
+    "model": "questions.question",
+    "pk": 8,
+    "fields": {
+      "jurisdiction": 1,
+      "type": "true_false",
+      "difficulty": "beginner",
+      "topic": "documents",
+      "text": "You must always carry your driving license when driving.",
+      "image_url": null,
+      "options": [
+        {"key": "true", "text": "True"},
+        {"key": "false", "text": "False"}
+      ],
+      "correct_answer": "true",
+      "source": "seed",
+      "is_validated": true,
+      "explanation_cache": null
+    }
+  },
+  {
+    "model": "questions.question",
+    "pk": 9,
+    "fields": {
+      "jurisdiction": 1,
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "topic": "right_of_way",
+      "text": "Who has priority when a tram crosses your path?",
+      "image_url": null,
+      "options": [
+        {"key": "A", "text": "You, if you were there first"},
+        {"key": "B", "text": "The tram always has priority"},
+        {"key": "C", "text": "Neither, both must stop"},
+        {"key": "D", "text": "You, because cars have priority"}
+      ],
+      "correct_answer": "B",
+      "source": "seed",
+      "is_validated": true,
+      "explanation_cache": null
+    }
+  },
+  {
+    "model": "questions.question",
+    "pk": 10,
+    "fields": {
+      "jurisdiction": 1,
+      "type": "multiple_choice",
+      "difficulty": "beginner",
+      "topic": "environment",
+      "text": "When must you turn off your engine while waiting?",
+      "image_url": null,
+      "options": [
+        {"key": "A", "text": "Only at traffic lights"},
+        {"key": "B", "text": "At railroad crossings only"},
+        {"key": "C", "text": "Whenever waiting is expected to be longer than briefly"},
+        {"key": "D", "text": "Never required"}
+      ],
+      "correct_answer": "C",
+      "source": "seed",
+      "is_validated": true,
+      "explanation_cache": null
+    }
+  }
+]

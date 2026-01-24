@@ -1,320 +1,150 @@
-# Backend
+# Backend — Driving License Exam Prep API
 
-Business logic, data processing, and API endpoints. Intermediary between frontend and data/services.
+Django REST Framework backend providing authentication, quiz management, RAG-powered explanations, and learning intelligence.
+
+> **Technology:** Django 5.0 + Django REST Framework + PostgreSQL + pgvector + Celery + Redis
 
 ## Responsibilities
 
-- API endpoint exposure (RESTful/GraphQL)
-- Business logic implementation
-- Data validation
-- Authentication & authorization
-- Data processing
-- External service integration
-- Error handling
+- REST API endpoints for all platform features
+- User authentication (JWT)
+- Quiz session management
+- RAG-powered explanation generation
+- Spaced repetition scheduling
+- Legal document ingestion and embedding
+- Background task processing
 
-## Structure
+---
 
-```
-backend/
-├── controllers/     # API endpoint handlers
-├── services/        # Business logic
-├── models/          # Data models/schemas
-├── repositories/    # Data access layer
-├── middleware/      # Request/response middleware
-├── utils/           # Utilities
-└── config/          # Configuration
-```
+**UX Reference:** [Getting an Explanation](../docs/ux-scenarios.md#scenario-5-getting-an-explanation-rag)
 
-## Principles
+---
 
-1. **Layered Architecture**: Distinct layer separation
-2. **Dependency Injection**: Loose coupling
-3. **Single Responsibility**: One clear purpose per module
-4. **API First**: Design APIs before implementation
-5. **Security by Default**: Security at all layers
+## API Response Format
 
-## Layer Responsibilities
-
-**Controller:**
-- Handle HTTP requests/responses
-- Route to services
-- Validate request format
-- Transform responses
-- Manage HTTP status codes
-
-**Service:**
-- Business logic
-- Orchestrate repository operations
-- Handle transactions
-- Apply business rules
-- Data transformations
-
-**Repository:**
-- Abstract data access
-- Execute queries
-- Handle persistence
-- Caching logic
-- Connection management
-
-**Middleware:**
-- Authentication/authorization
-- Logging
-- Error handling
-- Validation
-- Rate limiting
-
-## API Design
-
-### RESTful Conventions
-
-**Methods:**
-- GET: Retrieve
-- POST: Create
-- PUT/PATCH: Update
-- DELETE: Remove
-
-**URL Structure:**
-- Nouns for resources
-- Hierarchical
-- Versioned (`/api/v1/`)
-- Query params for filtering/pagination
-
-**Status Codes:**
-- 200: Success
-- 201: Created
-- 400: Bad Request
-- 401: Unauthorized
-- 404: Not Found
-- 500: Server Error
-
-### Request/Response Format
-
-**Request:**
-```
-Headers: Content-Type, Authorization
-Body: Valid JSON, follows schema
-```
-
-**Response:**
+**Success:**
 ```json
 {
   "success": true,
-  "data": {},
-  "message": "",
-  "errors": []
-}
-```
-
-## Data Validation
-
-**Input:**
-- Body structure
-- Query/path parameters
-- Headers
-- File uploads
-
-**Rules:**
-- Type checking
-- Format validation
-- Range constraints
-- Required fields
-- Business rules
-
-**Output:**
-- Sanitize data
-- Remove sensitive info
-- Consistent formats
-- Validate integrity
-
-## Security
-
-**Authentication:**
-- Secure mechanisms (OAuth, JWT)
-- No plain text passwords
-- Secure session management
-- MFA support
-
-**Authorization:**
-- Role-based access control
-- Permission validation per request
-- Least privilege
-- Audit access
-- Resource ownership
-
-**Protections:**
-- SQL Injection: Parameterized queries
-- XSS: Sanitize outputs
-- CSRF: CSRF tokens
-- Authentication bypass
-- Privilege escalation
-
-**General:**
-- Update dependencies
-- Environment variables for secrets
-- Rate limiting
-- Security event logging
-- Encrypt sensitive data
-- HTTPS only
-
-## Error Handling
-
-**Client Errors (4xx):**
-- Invalid input
-- Authentication failures
-- Authorization failures
-- Not found
-- Conflicts
-
-**Server Errors (5xx):**
-- Exceptions
-- Database errors
-- External service failures
-- Config errors
-
-**Format:**
-```json
-{
-  "success": false,
-  "error": {
-    "code": "ERROR_CODE",
-    "message": "User-friendly message",
-    "details": {}
+  "data": { ... },
+  "meta": {
+    "timestamp": "2026-01-17T10:00:00Z",
+    "request_id": "uuid-here"
   }
 }
 ```
 
-**Strategy:**
-- Catch at appropriate level
-- Log with context
-- Meaningful messages
-- Don't expose internals
-- Proper error recovery
-- Structured responses
+**Error:**
+```json
+{
+  "success": false,
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Human-readable message",
+    "details": {
+      "field": ["Error for this field"]
+    }
+  }
+}
+```
 
-## Database Access
+**Error Codes:**
+| Code | HTTP Status | Description |
+|------|-------------|-------------|
+| `VALIDATION_ERROR` | 400 | Invalid request data |
+| `AUTHENTICATION_REQUIRED` | 401 | Missing/invalid token |
+| `PERMISSION_DENIED` | 403 | Insufficient permissions |
+| `NOT_FOUND` | 404 | Resource doesn't exist |
+| `RATE_LIMITED` | 429 | Too many requests |
+| `INTERNAL_ERROR` | 500 | Server error |
 
-**Repository Pattern:**
-- Abstract operations
-- Clean interfaces
-- Connection management
-- Transaction support
-- Easy testing
+---
 
-**Optimization:**
-- Appropriate indexes
-- Avoid N+1 queries
-- Pagination
-- Connection pooling
-- Caching
-- Monitor performance
+## Background Tasks (Celery)
 
-**Integrity:**
-- Proper constraints
-- Transactions for multi-step ops
-- Validate before persistence
-- Handle concurrent access
-- Referential integrity
+| Task | Trigger | Purpose |
+|------|---------|---------|
+| `generate_embeddings` | Document ingestion | Create embeddings for new legal docs |
+| `refresh_embeddings` | Scheduled (weekly) | Re-embed documents if models updated |
+| `pregenerate_explanations` | Scheduled (nightly) | Cache explanations for frequently missed questions |
+| `cleanup_expired_cache` | Scheduled (daily) | Remove stale cache entries |
+| `send_review_reminders` | Scheduled (daily) | Email users with due reviews |
 
-## Performance
+---
 
-**Response Time:**
-- Minimize queries
-- Caching
-- Async operations
-- Optimize algorithms
-- Profile bottlenecks
+## Security
 
-**Scalability:**
-- Horizontal scaling
-- Stateless services
-- Load balancing
-- Layered caching
-- Queue long tasks
+| Concern | Implementation |
+|---------|----------------|
+| Authentication | JWT with 15-min access, 7-day refresh tokens |
+| Password Storage | Argon2 hashing via Django |
+| Rate Limiting | DRF throttling: 100/hour anon, 1000/hour authenticated |
+| AI Rate Limiting | 20 explanations/user/hour |
+| Input Validation | DRF serializers + Pydantic |
+| SQL Injection | Django ORM parameterized queries |
+| CORS | Whitelist frontend origin only |
+
+---
+
+## Environment Variables
+
+```bash
+# .env.example
+DEBUG=True
+SECRET_KEY=your-secret-key
+ALLOWED_HOSTS=localhost,127.0.0.1
+
+# Database
+DATABASE_URL=postgresql://user:pass@localhost:5432/driving_prep
+POSTGRES_DB=driving_prep
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+
+# Redis
+REDIS_URL=redis://localhost:6379/0
+CELERY_BROKER_URL=redis://localhost:6379/1
+
+# OpenAI
+OPENAI_API_KEY=sk-...
+OPENAI_EMBEDDING_MODEL=text-embedding-3-small
+OPENAI_CHAT_MODEL=gpt-4-turbo-preview
+
+# JWT
+JWT_ACCESS_TOKEN_LIFETIME_MINUTES=15
+JWT_REFRESH_TOKEN_LIFETIME_DAYS=7
+
+# CORS
+CORS_ALLOWED_ORIGINS=http://localhost:3000
+```
+
+---
 
 ## Testing
 
-**Unit:**
-- Business logic isolation
-- Mock dependencies
-- Cover edge cases
-- High coverage
-- Fast, independent
+```bash
+# Run all tests
+pytest
 
-**Integration:**
-- Component interactions
-- Database operations
-- API endpoints
-- Auth flows
-- Error handling
+# Run with coverage
+pytest --cov=apps --cov-report=html
 
-## Logging & Monitoring
+# Run specific app tests
+pytest tests/test_quiz/
 
-**Logging:**
-- Request/response metadata
-- Business events
-- Errors/exceptions
-- Security events
-- Performance metrics
+# Run with verbose output
+pytest -v
+```
 
-**Levels:**
-- ERROR: Critical failures
-- WARN: Concerning events
-- INFO: Notable events
-- DEBUG: Diagnostics
+**Test Categories:**
+- Unit tests: Business logic in services
+- Integration tests: API endpoints with database
+- RAG tests: Mocked LLM responses
 
-**Best Practices:**
-- Structured logging
-- Correlation IDs
-- No sensitive data
-- Log rotation
-- Centralization
+---
 
-**Monitoring:**
-- API response times
-- Error rates
-- Resource usage
-- Alerts for anomalies
-- Business metrics
+## Related Documentation
 
-## Configuration
-
-**Environment-Based:**
-- Use environment variables
-- Support dev/staging/prod
-- No secrets in version control
-- Document options
-- Validate on startup
-
-**Categories:**
-- Application settings
-- Database connections
-- API keys/secrets
-- Feature flags
-- Logging config
-
-## Deployment
-
-**Pre-Deployment:**
-- [ ] Tests passing
-- [ ] Environment variables configured
-- [ ] Database migrations ready
-- [ ] Secrets managed
-- [ ] Logging configured
-- [ ] Monitoring set up
-- [ ] Performance validated
-- [ ] Security reviewed
-
-**Strategy:**
-- Automated pipelines
-- Zero-downtime deployments
-- Rollback procedures
-- Monitor health
-- Validate post-deployment
-
-## Resources
-
-- `ARCHITECTURE.md` - System architecture
-- `CONTRIBUTING.md` - Contribution guidelines
-- `.editorconfig` - Coding standards
-- `.github/copilot-instructions.md` - Copilot usage
-- `frontend/README.md` - Frontend integration
+- [ARCHITECTURE.md](../ARCHITECTURE.md) — System design and data flow
+- [PROJECT.md](../PROJECT.md) — Feature roadmap
+- [docs/ux-scenarios.md](../docs/ux-scenarios.md) — User experience flows
+- [frontend/README.md](../frontend/README.md) — Frontend integration
