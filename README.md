@@ -14,6 +14,7 @@ See [PROJECT.md](./PROJECT.md) for problem statement and features.
 * Agent created [OpenAPI](openapi.yaml) based on feature list.
 * Frontend UI has been scaffolded using Loveable, for more details see [here](./frontend/outline/SETUP.md).
 * Leveraging multiagent mode, [frontend](frontend/.instructions.md) and [backend](backend/.instructions.md) was developed in parallel using GitHub Copilot, i.e. GPT-5.2-Codex.
+* Context7 was used to assist with up-to-date documentation and code snippets generation.
 
 ---
 
