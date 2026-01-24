@@ -4,6 +4,16 @@ Django REST Framework backend providing authentication, quiz management, RAG-pow
 
 > **Technology:** Django 5.0 + Django REST Framework + PostgreSQL + pgvector + Celery + Redis
 
+## External Dependencies
+
+| Service | Purpose | Local Setup |
+|---------|---------|-------------|
+| PostgreSQL 16 + pgvector | Primary database, vector store | `docker compose up -d postgres` |
+| Redis 7 | Caching, sessions, Celery broker | `docker compose up -d redis` |
+| OpenAI API | LLM for explanations, embeddings | API key in `.env` |
+
+> **Important:** PostgreSQL and Redis must be run via Docker Compose. See [SETUP.md](../SETUP.md) for instructions.
+
 ## Responsibilities
 
 - REST API endpoints for all platform features
@@ -88,23 +98,25 @@ Django REST Framework backend providing authentication, quiz management, RAG-pow
 
 ## Environment Variables
 
+> **Note:** External services (PostgreSQL, Redis) run in Docker containers. Start them with `docker compose up -d` from the project root.
+
 ```bash
 # .env.example
 DEBUG=True
 SECRET_KEY=your-secret-key
 ALLOWED_HOSTS=localhost,127.0.0.1
 
-# Database
+# Database (Docker: driving_prep_postgres)
 DATABASE_URL=postgresql://user:pass@localhost:5432/driving_prep
 POSTGRES_DB=driving_prep
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres
 
-# Redis
+# Redis (Docker: driving_prep_redis)
 REDIS_URL=redis://localhost:6379/0
 CELERY_BROKER_URL=redis://localhost:6379/1
 
-# OpenAI
+# OpenAI (external cloud service)
 OPENAI_API_KEY=sk-...
 OPENAI_EMBEDDING_MODEL=text-embedding-3-small
 OPENAI_CHAT_MODEL=gpt-4-turbo-preview
