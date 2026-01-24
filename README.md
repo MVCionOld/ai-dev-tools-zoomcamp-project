@@ -1,5 +1,7 @@
 # AI-Powered Driving License Exam Prep Platform
 
+[![CI](https://github.com/MVCionOld/ai-dev-tools-zoomcamp-project/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/MVCionOld/ai-dev-tools-zoomcamp-project/actions/workflows/ci.yml)
+
 ![Alt Text](./assets/drivexam.gif)
 
 ---
