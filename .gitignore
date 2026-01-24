@@ -206,5 +206,6 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 
-frontend/dist/*
-frontend/outline/demo/*
+*/frontend/dist/*
+*/frontend/outline/demo/*
+*/node_modules/*

@@ -11,6 +11,7 @@ Django + React full-stack app. Be direct.
 3. **Announce refactors** — no silent changes
 4. **Stay in your layer** — Views→Services→Repositories
 5. **Frontend-backend contact changes** - reflect them in `../docs/api-contract.md`
+6. **Readonly and no runs**: use outline source code from ../frontend/outline/ai-dev-tools-zoomcamp-project-demo/ for reference only. Do not run. Do not bluntly copy code from there without complying API contracts and agent instructions.
 
 ---
 
