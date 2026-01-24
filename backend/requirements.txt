@@ -5,6 +5,7 @@ django-cors-headers==4.4.0
 psycopg==3.2.1
 psycopg-binary==3.2.1
 argon2-cffi==23.1.0
+pgvector==0.2.5
 
 pytest==8.3.2
 pytest-django==4.9.0

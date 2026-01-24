@@ -1,0 +1,819 @@
+openapi: 3.0.3
+info:
+  title: AI Driving Prep API
+  version: 0.1.0
+  description: OpenAPI specification generated from docs/api-contract.md
+servers:
+  - url: /api/v1
+paths:
+  /auth/register:
+    post:
+      summary: Register user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterRequest"
+      responses:
+        "201":
+          description: Registered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RegisterResponse"
+  /auth/login:
+    post:
+      summary: Login user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+      responses:
+        "200":
+          description: Logged in
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoginResponse"
+  /auth/refresh:
+    post:
+      summary: Refresh token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RefreshRequest"
+      responses:
+        "200":
+          description: Refreshed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RefreshResponse"
+  /auth/logout:
+    post:
+      summary: Logout
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LogoutRequest"
+      responses:
+        "200":
+          description: Logged out
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LogoutResponse"
+  /auth/me:
+    get:
+      summary: Current user
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: User profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MeResponse"
+  /users/preferences:
+    patch:
+      summary: Update preferences
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PreferencesRequest"
+      responses:
+        "200":
+          description: Updated preferences
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreferencesResponse"
+  /jurisdictions:
+    get:
+      summary: List jurisdictions
+      responses:
+        "200":
+          description: Jurisdictions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JurisdictionsResponse"
+  /quiz/start:
+    post:
+      summary: Start quiz
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuizStartRequest"
+      responses:
+        "201":
+          description: Quiz started
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuizStartResponse"
+  /quiz/{quiz_id}/answer:
+    post:
+      summary: Submit answer
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: quiz_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuizAnswerRequest"
+      responses:
+        "200":
+          description: Answer submitted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuizAnswerResponse"
+  /quiz/{quiz_id}/results:
+    get:
+      summary: Quiz results
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: quiz_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuizResultsResponse"
+  /progress:
+    get:
+      summary: Progress summary
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Progress summary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProgressSummaryResponse"
+  /progress/weak-areas:
+    get:
+      summary: Weak areas
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Weak areas
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WeakAreasResponse"
+  /progress/review-queue:
+    get:
+      summary: Review queue
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Review queue
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReviewQueueResponse"
+  /knowledge/ingest:
+    post:
+      summary: Ingest legal document
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/KnowledgeIngestRequest"
+      responses:
+        "200":
+          description: Ingested
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KnowledgeIngestResponse"
+  /knowledge/explain:
+    post:
+      summary: Explain question
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/KnowledgeExplainRequest"
+      responses:
+        "200":
+          description: Explanation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KnowledgeExplainResponse"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    ApiMeta:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        request_id:
+          type: string
+    ApiError:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: object
+          additionalProperties: true
+      required: [code, message]
+    ApiErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          enum: [false]
+        error:
+          $ref: "#/components/schemas/ApiError"
+      required: [success, error]
+    RegisterRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+        password_confirm:
+          type: string
+      required: [email, password, password_confirm]
+    RegisterData:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+          format: email
+        requires_verification:
+          type: boolean
+      required: [id, email, requires_verification]
+    RegisterResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          enum: [true]
+        data:
+          $ref: "#/components/schemas/RegisterData"
+        meta:
+          $ref: "#/components/schemas/ApiMeta"
+      required: [success, data]
+    LoginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+      required: [email, password]
+    AuthUser:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+          format: email
+        preferred_jurisdiction:
+          type: string
+          nullable: true
+        preferred_language:
+          type: string
+          nullable: true
+      required: [id, email]
+    LoginData:
+      type: object
+      properties:
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+        expires_in:
+          type: integer
+        user:
+          $ref: "#/components/schemas/AuthUser"
+      required: [access_token, refresh_token, expires_in, user]
+    LoginResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          enum: [true]
+        data:
+          $ref: "#/components/schemas/LoginData"
+        meta:
+          $ref: "#/components/schemas/ApiMeta"
+      required: [success, data]
+    RefreshRequest:
+      type: object
+      properties:
+        refresh_token:
+          type: string
+      required: [refresh_token]
+    RefreshData:
+      type: object
+      properties:
+        access_token:
+          type: string
+        expires_in:
+          type: integer
+      required: [access_token, expires_in]
+    RefreshResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          enum: [true]
+        data:
+          $ref: "#/components/schemas/RefreshData"
+        meta:
+          $ref: "#/components/schemas/ApiMeta"
+      required: [success, data]
+    LogoutRequest:
+      type: object
+      properties:
+        refresh_token:
+          type: string
+      required: [refresh_token]
+    LogoutResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          enum: [true]
+        data:
+          type: object
+          nullable: true
+        meta:
+          $ref: "#/components/schemas/ApiMeta"
+      required: [success]
+    MeData:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+          format: email
+        preferred_jurisdiction:
+          type: string
+          nullable: true
+        preferred_language:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+      required: [id, email, created_at]
+    MeResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          enum: [true]
+        data:
+          $ref: "#/components/schemas/MeData"
+        meta:
+          $ref: "#/components/schemas/ApiMeta"
+      required: [success, data]
+    PreferencesRequest:
+      type: object
+      properties:
+        preferred_jurisdiction:
+          type: string
+        preferred_language:
+          type: string
+      required: []
+    PreferencesData:
+      type: object
+      properties:
+        preferred_jurisdiction:
+          type: string
+          nullable: true
+        preferred_language:
+          type: string
+          nullable: true
+      required: []
+    PreferencesResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          enum: [true]
+        data:
+          $ref: "#/components/schemas/PreferencesData"
+        meta:
+          $ref: "#/components/schemas/ApiMeta"
+      required: [success, data]
+    Jurisdiction:
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+        languages:
+          type: array
+          items:
+            type: string
+        default_language:
+          type: string
+      required: [code, name, languages, default_language]
+    JurisdictionsResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          enum: [true]
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Jurisdiction"
+        meta:
+          $ref: "#/components/schemas/ApiMeta"
+      required: [success, data]
+    QuizStartRequest:
+      type: object
+      properties:
+        jurisdiction:
+          type: string
+        mode:
+          type: string
+          enum: [practice, exam]
+        question_count:
+          type: integer
+      required: [jurisdiction, mode, question_count]
+    QuizQuestionOption:
+      type: object
+      properties:
+        key:
+          type: string
+        text:
+          type: string
+      required: [key, text]
+    QuizQuestionContent:
+      type: object
+      properties:
+        text:
+          type: string
+        image_url:
+          type: string
+          nullable: true
+        options:
+          type: array
+          items:
+            $ref: "#/components/schemas/QuizQuestionOption"
+      required: [text, options]
+    QuizQuestion:
+      type: object
+      properties:
+        id:
+          type: integer
+        index:
+          type: integer
+        type:
+          type: string
+        content:
+          $ref: "#/components/schemas/QuizQuestionContent"
+        topic:
+          type: string
+        difficulty:
+          type: string
+      required: [id, index, type, content, topic, difficulty]
+    QuizStartData:
+      type: object
+      properties:
+        quiz_id:
+          type: string
+        mode:
+          type: string
+        total_questions:
+          type: integer
+        time_limit_seconds:
+          type: integer
+          nullable: true
+        current_question:
+          $ref: "#/components/schemas/QuizQuestion"
+      required: [quiz_id, mode, total_questions, current_question]
+    QuizStartResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          enum: [true]
+        data:
+          $ref: "#/components/schemas/QuizStartData"
+        meta:
+          $ref: "#/components/schemas/ApiMeta"
+      required: [success, data]
+    QuizAnswerRequest:
+      type: object
+      properties:
+        question_id:
+          type: integer
+        answer:
+          type: string
+      required: [question_id, answer]
+    QuizAnswerData:
+      type: object
+      properties:
+        is_correct:
+          type: boolean
+        correct_answer:
+          type: string
+        has_next:
+          type: boolean
+        next_question:
+          $ref: "#/components/schemas/QuizQuestion"
+      required: [is_correct, correct_answer, has_next]
+    QuizAnswerResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          enum: [true]
+        data:
+          $ref: "#/components/schemas/QuizAnswerData"
+        meta:
+          $ref: "#/components/schemas/ApiMeta"
+      required: [success, data]
+    TopicStats:
+      type: object
+      properties:
+        correct:
+          type: integer
+        total:
+          type: integer
+      required: [correct, total]
+    QuizResultsData:
+      type: object
+      properties:
+        quiz_id:
+          type: string
+        score:
+          type: integer
+        total:
+          type: integer
+        percentage:
+          type: integer
+        passed:
+          type: boolean
+        pass_threshold:
+          type: integer
+        duration_seconds:
+          type: integer
+          nullable: true
+        by_topic:
+          type: object
+          additionalProperties:
+            $ref: "#/components/schemas/TopicStats"
+        weak_areas:
+          type: array
+          items:
+            type: string
+        incorrect_questions:
+          type: array
+          items:
+            type: integer
+      required: [quiz_id, score, total, percentage, passed, pass_threshold, by_topic, weak_areas, incorrect_questions]
+    QuizResultsResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          enum: [true]
+        data:
+          $ref: "#/components/schemas/QuizResultsData"
+        meta:
+          $ref: "#/components/schemas/ApiMeta"
+      required: [success, data]
+    ProgressSummaryData:
+      type: object
+      properties:
+        total_questions_attempted:
+          type: integer
+        total_correct:
+          type: integer
+        accuracy_percentage:
+          type: integer
+        current_streak:
+          type: integer
+        longest_streak:
+          type: integer
+        readiness_score:
+          type: integer
+        last_activity:
+          type: string
+          format: date-time
+          nullable: true
+      required: [total_questions_attempted, total_correct, accuracy_percentage, current_streak, longest_streak, readiness_score]
+    ProgressSummaryResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          enum: [true]
+        data:
+          $ref: "#/components/schemas/ProgressSummaryData"
+        meta:
+          $ref: "#/components/schemas/ApiMeta"
+      required: [success, data]
+    WeakAreaItem:
+      type: object
+      properties:
+        topic:
+          type: string
+        accuracy:
+          type: integer
+        questions_attempted:
+          type: integer
+        recommendation:
+          type: string
+      required: [topic, accuracy, questions_attempted, recommendation]
+    WeakAreasData:
+      type: object
+      properties:
+        weak_areas:
+          type: array
+          items:
+            $ref: "#/components/schemas/WeakAreaItem"
+      required: [weak_areas]
+    WeakAreasResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          enum: [true]
+        data:
+          $ref: "#/components/schemas/WeakAreasData"
+        meta:
+          $ref: "#/components/schemas/ApiMeta"
+      required: [success, data]
+    ReviewQueueQuestion:
+      type: object
+      properties:
+        id:
+          type: integer
+        due_date:
+          type: string
+          format: date
+        interval_days:
+          type: integer
+        topic:
+          type: string
+      required: [id, due_date, interval_days, topic]
+    ReviewQueueData:
+      type: object
+      properties:
+        due_count:
+          type: integer
+        questions:
+          type: array
+          items:
+            $ref: "#/components/schemas/ReviewQueueQuestion"
+      required: [due_count, questions]
+    ReviewQueueResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          enum: [true]
+        data:
+          $ref: "#/components/schemas/ReviewQueueData"
+        meta:
+          $ref: "#/components/schemas/ApiMeta"
+      required: [success, data]
+    KnowledgeIngestRequest:
+      type: object
+      properties:
+        jurisdiction:
+          type: string
+        title:
+          type: string
+        content_text:
+          type: string
+        source_url:
+          type: string
+          nullable: true
+        language:
+          type: string
+        effective_date:
+          type: string
+          format: date
+      required: [jurisdiction, title, content_text]
+    KnowledgeIngestData:
+      type: object
+      properties:
+        document_title:
+          type: string
+        chunk_count:
+          type: integer
+      required: [document_title, chunk_count]
+    KnowledgeIngestResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          enum: [true]
+        data:
+          $ref: "#/components/schemas/KnowledgeIngestData"
+        meta:
+          $ref: "#/components/schemas/ApiMeta"
+      required: [success, data]
+    KnowledgeExplainRequest:
+      type: object
+      properties:
+        question_id:
+          type: integer
+        jurisdiction:
+          type: string
+      required: [question_id, jurisdiction]
+    KnowledgeCitation:
+      type: object
+      properties:
+        source_id:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+          nullable: true
+        snippet:
+          type: string
+      required: [source_id, title, snippet]
+    KnowledgeExplainData:
+      type: object
+      properties:
+        explanation:
+          type: string
+        source:
+          type: string
+        citations:
+          type: array
+          items:
+            $ref: "#/components/schemas/KnowledgeCitation"
+      required: [explanation, source, citations]
+    KnowledgeExplainResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          enum: [true]
+        data:
+          $ref: "#/components/schemas/KnowledgeExplainData"
+        meta:
+          $ref: "#/components/schemas/ApiMeta"
+      required: [success, data]

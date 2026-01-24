@@ -1,15 +1,19 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { Card } from "../../components/Card";
+import { ExplanationPanel } from "../../components/ExplanationPanel";
 import { ProgressBar } from "../../components/ProgressBar";
+import { fetchExplanation } from "../../services/api/knowledgeApi";
 import { fetchResults } from "../../services/api/quizApi";
 import { useAuthStore } from "../../stores/authStore";
 
 export const ResultsPage = () => {
   const { id } = useParams();
   const accessToken = useAuthStore((state) => state.accessToken);
+  const user = useAuthStore((state) => state.user);
+  const [selectedQuestionId, setSelectedQuestionId] = useState<number | null>(null);
 
   const { data, isLoading } = useQuery({
     queryKey: ["quiz-results", id],
@@ -24,6 +28,26 @@ export const ResultsPage = () => {
 
   const result = useMemo(() => (data && data.success ? data.data : null), [data]);
   const errorMessage = useMemo(() => (data && !data.success ? data.error.message : null), [data]);
+  const jurisdiction = user?.preferred_jurisdiction ?? "DE";
+
+  const explanationMutation = useMutation({
+    mutationFn: async (questionId: number) => {
+      if (!accessToken) {
+        throw new Error("Missing access token");
+      }
+      return fetchExplanation(accessToken, {
+        question_id: questionId,
+        jurisdiction,
+      });
+    },
+  });
+
+  const explanation = useMemo(() => {
+    if (!explanationMutation.data || !explanationMutation.data.success) {
+      return null;
+    }
+    return explanationMutation.data.data;
+  }, [explanationMutation.data]);
 
   if (!id) {
     return (
@@ -79,6 +103,49 @@ export const ResultsPage = () => {
                 })}
               </div>
             </Card>
+
+            {result.incorrect_questions.length > 0 && (
+              <Card>
+                <h3 className="text-lg font-semibold">Review incorrect questions</h3>
+                <p className="mt-1 text-sm text-slate-500">Request a RAG explanation for any question.</p>
+                <div className="mt-4 flex flex-wrap gap-3">
+                  {result.incorrect_questions.map((questionId) => (
+                    <button
+                      key={questionId}
+                      type="button"
+                      onClick={() => {
+                        setSelectedQuestionId(questionId);
+                        explanationMutation.mutate(questionId);
+                      }}
+                      className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${
+                        selectedQuestionId === questionId
+                          ? "border-primary bg-primary/10 text-primary"
+                          : "border-slate-200 text-slate-600"
+                      }`}
+                    >
+                      Question {questionId}
+                    </button>
+                  ))}
+                </div>
+                {explanationMutation.isPending && (
+                  <p className="mt-4 text-sm text-slate-500">Generating explanation...</p>
+                )}
+                {explanationMutation.isError && (
+                  <p className="mt-4 text-sm font-semibold text-rose-600">
+                    Unable to load explanation. Try again.
+                  </p>
+                )}
+                {explanation && (
+                  <div className="mt-6">
+                    <ExplanationPanel
+                      explanation={explanation.explanation}
+                      source={explanation.source}
+                      citations={explanation.citations}
+                    />
+                  </div>
+                )}
+              </Card>
+            )}
           </>
         )}
       </div>

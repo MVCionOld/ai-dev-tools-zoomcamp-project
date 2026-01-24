@@ -376,6 +376,64 @@ All responses follow format:
 }
 ```
 
+  ---
+
+  ## Knowledge (RAG)
+
+  ### POST /knowledge/ingest
+
+  **Request:**
+  ```json
+  {
+    "jurisdiction": "DE",
+    "title": "StVO §21",
+    "content_text": "Full legal text here...",
+    "source_url": "https://example.org/stvo/21",
+    "language": "de",
+    "effective_date": "2024-01-01"
+  }
+  ```
+
+  **Response (200):**
+  ```json
+  {
+    "success": true,
+    "data": {
+      "document_title": "StVO §21",
+      "chunk_count": 12
+    }
+  }
+  ```
+
+  ### POST /knowledge/explain
+
+  **Request:**
+  ```json
+  {
+    "question_id": 123,
+    "jurisdiction": "DE"
+  }
+  ```
+
+  **Response (200):**
+  ```json
+  {
+    "success": true,
+    "data": {
+      "explanation": "According to §21 StVO...",
+      "source": "mock",
+      "citations": [
+        {
+          "source_id": "DOC-10-2",
+          "title": "StVO §21",
+          "url": "https://example.org/stvo/21",
+          "snippet": "Pedestrians must use sidewalks where available..."
+        }
+      ]
+    }
+  }
+  ```
+
 ---
 
 ## Error Codes

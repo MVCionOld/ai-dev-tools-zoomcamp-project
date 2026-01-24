@@ -8,4 +8,5 @@ urlpatterns = [
     path("api/v1/", include("apps.jurisdictions.urls")),
     path("api/v1/", include("apps.quiz.urls")),
     path("api/v1/", include("apps.progress.urls")),
+    path("api/v1/", include("apps.knowledge.urls")),
 ]

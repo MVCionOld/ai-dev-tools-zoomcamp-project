@@ -12,6 +12,7 @@ cd ./ai-dev-tools-zoomcamp-project-demo
 ## Source
 
 This UI is generated with help of https://lovable.dev/  
+[Preview](https://id-preview--462e1c62-39b0-4732-9dc8-f75c3f0a546d.lovable.app/?__lovable_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNDZGQzRxbWNJY1R2M2d6YjAyT3BTUWZTd0xOMiIsInByb2plY3RfaWQiOiI0NjJlMWM2Mi0zOWIwLTQ3MzItOWRjOC1mNzVjM2YwYTU0NmQiLCJub25jZSI6ImU2NmEzOWM3OThmYmY2YTUzMjUyMDdlZTMwMTIyYzk1IiwiYWNjZXNzX3R5cGUiOiJwcm9qZWN0IiwiaXNzIjoibG92YWJsZS1hcGkiLCJzdWIiOiI0NjJlMWM2Mi0zOWIwLTQ3MzItOWRjOC1mNzVjM2YwYTU0NmQiLCJhdWQiOlsibG92YWJsZS1hcHAiXSwiZXhwIjoxNzY5ODg4NDY4LCJuYmYiOjE3NjkyODM2NjgsImlhdCI6MTc2OTI4MzY2OH0.IgRcWq6OoR2UeLtwWG8GBAlcWef56LcTnzJVM6AHX50)
 
 ### Lovable.dev Prompt
 

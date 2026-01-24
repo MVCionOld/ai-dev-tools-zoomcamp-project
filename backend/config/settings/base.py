@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "apps.questions",
     "apps.quiz",
     "apps.progress",
+    "apps.knowledge",
 ]
 
 MIDDLEWARE = [
